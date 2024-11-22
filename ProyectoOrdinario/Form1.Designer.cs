@@ -49,6 +49,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.BtnBuscar = new System.Windows.Forms.Button();
+            this.BtnRecargar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPersonajes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PcbPersonaje)).BeginInit();
             this.SuspendLayout();
@@ -67,8 +68,14 @@
             // CBFiltro
             // 
             this.CBFiltro.FormattingEnabled = true;
+            this.CBFiltro.Items.AddRange(new object[] {
+            resources.GetString("CBFiltro.Items"),
+            resources.GetString("CBFiltro.Items1"),
+            resources.GetString("CBFiltro.Items2"),
+            resources.GetString("CBFiltro.Items3")});
             resources.ApplyResources(this.CBFiltro, "CBFiltro");
             this.CBFiltro.Name = "CBFiltro";
+            this.CBFiltro.SelectedIndexChanged += new System.EventHandler(this.CBFiltro_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -171,10 +178,18 @@
             this.BtnBuscar.UseVisualStyleBackColor = true;
             this.BtnBuscar.Click += new System.EventHandler(this.BtnBuscar_Click);
             // 
+            // BtnRecargar
+            // 
+            resources.ApplyResources(this.BtnRecargar, "BtnRecargar");
+            this.BtnRecargar.Name = "BtnRecargar";
+            this.BtnRecargar.UseVisualStyleBackColor = true;
+            this.BtnRecargar.Click += new System.EventHandler(this.BtnRecargar_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BtnRecargar);
             this.Controls.Add(this.BtnBuscar);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label12);
@@ -226,6 +241,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button BtnBuscar;
+        private System.Windows.Forms.Button BtnRecargar;
     }
 }
 

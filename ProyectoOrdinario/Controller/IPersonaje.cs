@@ -11,6 +11,6 @@ namespace ProyectoOrdinario.Controller
     {
         Task<List<Personaje>> GetPersonajes();
         Task<List<Personaje>> ObtenerPersonajePorID(string id);
-        Task<List<Personaje>> GetPersonajesCasa();
+        Task<List<Personaje>> GetPersonajesCasa(string casa);
     }
 }

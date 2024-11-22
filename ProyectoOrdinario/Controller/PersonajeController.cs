@@ -17,7 +17,7 @@ namespace ProyectoOrdinario.Controller
         private static HttpClient CrearCliente()
         {
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://hp-api.onrender.com/");
+            httpClient.BaseAddress = new Uri("http://localhost:80/");
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             return httpClient;
@@ -28,7 +28,7 @@ namespace ProyectoOrdinario.Controller
 
         public async Task<List<Personaje>> GetPersonajes()
         {
-            HttpResponseMessage response = await client.GetAsync("api/characters");
+            HttpResponseMessage response = await client.GetAsync("personaje");
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
@@ -38,14 +38,21 @@ namespace ProyectoOrdinario.Controller
             return new List<Personaje>();
         }
 
-        public Task<List<Personaje>> GetPersonajesCasa()
+        public async Task<List<Personaje>> GetPersonajesCasa(string casa)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await client.GetAsync($"personaje/casa/{casa}");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var personajes = JsonConvert.DeserializeObject<List<Personaje>>(jsonResponse);
+                return personajes;
+            }
+            return new List<Personaje>();
         }
 
         public async Task<List<Personaje>> ObtenerPersonajePorID(string id)
         {
-            HttpResponseMessage response = await client.GetAsync($"https://hp-api.onrender.com/api/character/{id}");
+            HttpResponseMessage response = await client.GetAsync($"personaje/{id}");
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();

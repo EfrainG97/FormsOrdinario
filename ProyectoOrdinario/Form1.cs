@@ -67,22 +67,31 @@ namespace ProyectoOrdinario
 
         private async Task CargarImagenEnPictureBox(PictureBox pictureBox, string url)
         {
-            try
+            using (HttpClient client = new HttpClient())
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    var data = await client.GetByteArrayAsync(url);
+                var data = await client.GetByteArrayAsync(url);
 
-                    using (var stream = new MemoryStream(data))
-                    {
-                        pictureBox.Image = Image.FromStream(stream);
-                    }
+                using (var stream = new MemoryStream(data))
+                {
+                    pictureBox.Image = Image.FromStream(stream);
                 }
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar la imagen: {ex.Message}");
-            }
+        }
+
+        private void BtnRecargar_Click(object sender, EventArgs e)
+        {
+            CargarPersonajes();
+            CBFiltro.SelectedItem = null;
+            TBid.Text = null;
+        }
+
+        private async void CBFiltro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DGVPersonajes.DataSource = null;
+            var casas = await pc.GetPersonajesCasa(CBFiltro.Text);
+            DGVPersonajes.DataSource = casas;
+            DGVPersonajes.Columns["Image"].Visible = false;
         }
     }
 }
