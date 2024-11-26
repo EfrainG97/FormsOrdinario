@@ -17,7 +17,7 @@ namespace ProyectoOrdinario.Controller
         private static HttpClient CrearCliente()
         {
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localhost:80/");
+            httpClient.BaseAddress = new Uri("https://localhost:7250/");
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             return httpClient;
